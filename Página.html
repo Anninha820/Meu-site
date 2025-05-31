@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rock Internacional</title>
+  <style>
+    body {
+      margin: 0; /* Remove a margem padrão que os navegadores colocam no <body>.*/
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte do texto */
+      background: linear-gradient(to right, #1a1a1a, #2b2b2b); /* Dagradê de fundo horizontal */
+      color: #f4f4f4; /* Cor do texto */
+      scroll-behavior: smooth; /* Faz com que o rolamento da página seja suave */
+      padding-bottom: 60px; /* espaço para player fixo */
+    }
+    header {
+      background-color: #000; /* Cor de fundo do cabeçalho */
+      padding: 2rem; /* Espaçamento interno do cabeçalho */
+      text-align: center; /* Centraliza o conteúdo do cabeçalho */
+      border-bottom: 4px solid #e53935; /* Linha horizontal inferior */
+      animation: fadeInTop 1s ease; /* Animação */
+    }
+    header h1 { /* Define a escrita que está no cabeçalho */
+      font-size: 3.5rem; /* Tamanho da fonte */
+      font-family: 'Russo One', sans-serif; /* Fonte moderna e forte */
+      margin: 0; /* Remove as margens externas */
+      color: #e53935; /* Cor do título */
+      letter-spacing: 3px; /* Espaçamento entre as letras */
+      animation: fadeInTop 1.2s ease; /* Animação */
+    }
+    nav {
+      margin-top: 1rem; /* Separa o título do resto da página com um espaço */
+    }
+    nav a {
+      color: #f4f4f4; /* Cor padrão dos links */
+      text-decoration: none; /* Tira o sublinhado padrão dos links */
+      margin: 0 1rem; /* Espaço horizontal entre os links */
+      font-weight: bold; /* Deixa o texto dos links em negrito */
+      transition: color 0.3s; /* Faz a cor mudar suavemente ao passar o mouse */
+    }
+    nav a:hover {
+      color: #e53935; /* Faz os links mudarem de cor ao passar o mouse */
+    }
+    main {
+      max-width: 1000px; /* O conteúdo principal não ultrapassa 1000px de largura */
+      margin: 2rem auto; /* Espaço vertical de 2rem em cima e embaixo, e centraliza horizontalmente */
+      padding: 0 2rem; /* Espaço interno lateral de 2rem */
+      animation: fadeIn 1.2s ease-in; /* Animação */
+    }
+    section {
+      margin-bottom: 3rem; /* Espaço de 3rem embaixo de cada <section> */
+    }
+    h2 {
+      color: #e53935; /* Cor dos títulos */
+    }
+    audio, iframe { /* Elementos de mídia */
+      width: 100%; /* Ocupar toda a largura disponível do conteúdo principal */
+      margin-top: 1rem; /* Espaço em cima desses elementos */
+      border-radius: 10px; /* Arredonda os cantos com um raio de 10px */
+    }
+    ul, ol { /* Listas ordenadas e não ordenadas */
+      padding-left: 1.3rem; /* Afasta os marcadores do conteúdo */
+      margin-top: 0.5rem; /* Espaço em cima de 0.5rem */
+      margin-bottom: 1rem; /* Espaço embaixo de 1rem */
+    }
+    ul li::before {
+      content: "🎸 "; /* Coloca um emoji 🎸 antes de cada item da lista */
+    }
+    .highlight { /* Usado para destacar um parágrafo ou bloco de texto */
+      background-color: rgba(255, 255, 255, 0.05); /* Cor do fundo */
+      padding: 1rem; /* Espaçamento interno para todos os lados */
+      border-left: 5px solid #e53935; /* Borda vermelha na esquerda */
+      border-radius: 6px; /* Arredondamento nos cantos */
+      transition: background 0.3s ease; /* Transição suave */
+    }
+    .highlight:hover { /* O fundo fica mais claro ao passar o mouse */
+      background-color: rgba(255, 255, 255, 0.1); /* Cor do fundo */
+    }
+    .btn { /* Botão */
+      display: inline-block; /* Faz com que o botão se comporte como um bloco em linha, permitindo definir altura e largura sem quebrar o fluxo do texto */
+      padding: 12px 20px; /* Preenchimento interno de 12px em cima/ embaixo e 20px dos lados, aumenta o espaço clicável */
+      background-color: #e53935; /* Cor de fundo */
+      color: white; /* Cor do texto */
+      text-decoration: none; /* Remove qualquer sublinhado */
+      border: none; /* Remove quarquer borda padrão */
+      border-radius: 8px; /* Deixa os cantos arredondados com um raio de 8px */
+      font-weight: bold; /* Texto do botão em negrito */
+      transition: background-color 0.3s, transform 0.2s; /* Transição suave */
+      margin: 1rem 0.5rem; /* Margem externa de 1rem em cima e embaixo e 0.5rem dos lados */
+      cursor: pointer; /* Altera o cursor para uma "mãozinha", indicando que é clicavel */
+    }
+    .btn:hover { /* Seleciona o elemento com a classe .btn quando passa o mouse sobre ele */
+      background-color: #c62828; /* Cor de fundo */
+      transform: scale(1.05); /* Aumenta o tamanho do botão */
+    }
+    .btn-group { /* Seleciona qualquer elemento de classe .bnt-group */
+      text-align: center; /* Centraliza horizontalmente o conteúdo */
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background-color: #222;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      border: 2px solid #444;
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #444;
+      color: #ddd;
+    }
+    th {
+      background-color: #e53935;
+      color: #fff;
+      font-weight: bold;
+      padding: 12px;
+      text-align: center;
+
+    }
+     /* Muda cor da tabela */
+    tr:hover {
+      background-color: rgba(229, 57, 53, 0.3);
+      cursor: default;
+    }
+    footer {
+      background-color: #111;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      border-top: 1px solid #e53935;
+      margin-top: 3rem;
+    }
+    #back-to-top {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      background-color: #e53935;
+      color: white;
+      padding: 18px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: none;
+      transition: background 0.3s;
+      z-index: 1001;
+    }
+    #back-to-top:hover {
+      background-color: #c62828;
+    }
+    #audio-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #111;
+      border-top: 3px solid #e53935;
+      padding: 8px 16px;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+    #audio-player audio {
+      width: 100%;
+      outline: none;
+      border-radius: 8px;
+      background: #222;
+    }
+    /* Animações */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInTop {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    ul li a {
+      color: #4fc3f7; /* Azul claro */
+      text-decoration: none; /* Remove o sublinhado padrão dos links */
+      font-weight: bold; /* Deixa o texto em negrito */
+      transition: color 0.3s; /* Faz a cor mudar suavemente */
+    }
+     ul li a:hover {
+      color: #e53935; /* Vermelho vibrante ao passar o mouse */
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Rock Internacional</h1>
+    </nav>
+  </header>
+   <!-- Introdução -->
+  <main id="inicio">
+    <section>
+      <h2>Bem-vindo ao Universo do Rock</h2>
+      <p>Explore os maiores nomes, sons icônicos e batidas eletrizantes do rock internacional. Aqui o volume está sempre no máximo! 🤘</p>
+      <div class="btn-group">
+        <a class="btn" href="#musica">Ouvir Música</a>
+        <a class="btn" href="#video">Ver Vídeo</a>
+        <a class="btn" href="#playlist">Ir para Playlist</a>
+      </div>
+      <h2>Você sabe a história da origem do Rock?</h2>
+      <p>O estilo musical rock surgiu nos Estados Unidos na década de 50.  Sua origem está relacionada ao momento em que alguns músicos passaram a tocar guitarra elétrica nas suas apresentações e os vocalistas a cantarem as músicas com vozes mais impactantes.
+
+O rock foi influenciado pelo gênero musical blues, mais especificamente pelo Rhythm and Blues (R&B), considerado a vertente negra do blues e a mais dançante.  O rock também contou com influência da música country norte-americana.
+
+O então novo estilo musical foi propagado nos anos 1950 graças aos jovens, que rapidamente se encantaram com seu ritmo vibrante e cheio de energia.  Outro ponto ligado à origem do rock são as letras das músicas que, na época, contestavam o sistema político e cultural dos Estados Unidos.
+
+Grande parte dos primeiros vocalistas relacionados ao nascimento do rock tinha voz grave e rouca, sendo vários deles negros.  Os músicos também exalavam sensualidade nas suas apresentações, regadas ao ritmo da guitarra elétrica.</p>
+    </section>
+    <!-- Áudio Smells Like Teen Spirit -->
+    <section class="highlight" id="musica">
+      <h2>Ouça Agora: Smells Like Teen Spirit - Nirvana</h2>
+      <p>Entre no clima com uma trilha poderosa e sem palavras — apenas energia:</p>
+      <audio controls>
+        <source src="https://www.youtube.com/watch?v=hTWKbfoikeg" type="audio/mp3" />
+      </audio>
+    </section>
+    <!-- Vídeo Thunderstruck -->
+    <section id="video">
+      <h2>Clássico do YouTube: AC/DC - Thunderstruck</h2>
+      <p>Uma performance que eletrifica qualquer plateia:</p>
+      <iframe 
+        width="100%" 
+        height="500" 
+        src="AC_DC - Thunderstruck (Official Video).mp4" 
+        title="AC/DC - Thunderstruck (Official Video)" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </section>
+     <!-- Lista de Bandas -->
+     <section>
+    <h3>Top Bandas do Gênero</h3>
+    <ul>
+      <li><a href="https://www.google.com/search?q=Queen+rock+banda" target="_blank">Queen</a></li>
+      <li><a href="https://www.google.com/search?q=Led+Zeppelin+rock+banda" target="_blank">Led Zeppelin</a></li>
+      <li><a href="https://www.google.com/search?q=ACDC+rock+banda" target="_blank">AC/DC</a></li>
+      <li><a href="https://www.google.com/search?q=Metallica+rock+banda" target="_blank">Metallica</a></li>
+      <li><a href="https://www.google.com/search?q=Nirvana+rock+banda" target="_blank">Nirvana</a></li>
+    </ul>
+  </section>
+
+    <!-- Tabela com álbuns famosos -->
+    <section>
+      <h2>Álbuns Famosos de Rock</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Banda</th>
+            <th>Álbum</th>
+            <th>Ano</th>
+            <th>Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Queen</td>
+            <td>A Night at the Opera</td>
+            <td>1975</td>
+            <td>Inclui o clássico "Bohemian Rhapsody", um marco do rock progressivo.</td>
+          </tr>
+          <tr>
+            <td>Led Zeppelin</td>
+            <td>Led Zeppelin IV</td>
+            <td>1971</td>
+            <td>Famoso pelo hit "Stairway to Heaven", um hino do rock.</td>
+          </tr>
+          <tr>
+            <td>AC/DC</td>
+            <td>Back in Black</td>
+            <td>1980</td>
+            <td>Um dos álbuns de rock mais vendidos da história.</td>
+          </tr>
+          <tr>
+            <td>Metallica</td>
+            <td>Master of Puppets</td>
+            <td>1986</td>
+            <td>Influente álbum de metal que definiu o thrash metal moderno.</td>
+          </tr>
+          <tr>
+            <td>Nirvana</td>
+            <td>Nevermind</td>
+            <td>1991</td>
+            <td>Marco do grunge, com hits como "Smells Like Teen Spirit".</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  <!-- Subgêneros do Rock -->
+  <section>
+    <h3>Top Subgêneros do Rock</h3>
+    <ul>
+      <li><a href="https://www.google.com/search?q=Rock+Clássico" target="_blank">Rock Clássico</a></li>
+      <li><a href="https://www.google.com/search?q=hard+rock+estilo+de+musica&rlz=1C1GCEU_pt-BRBR1162BR1162&oq=h&gs_lcrp=EgZjaHJvbWUqDggBEEUYJxg7GIAEGIoFMgYIABBFGDwyDggBEEUYJxg7GIAEGIoFMgYIAhBFGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYQTIGCAcQRRg80gEIMjM3NGowajeoAgCwAgA&sourceid=chrome&ie=UTF-8" target="_blank">Hard Rock</a></li>
+      <li><a href="https://www.google.com/search?q=Heavy+Metal" target="_blank">Heavy Metal</a></li>
+      <li><a href="https://www.google.com/search?q=Grunge" target="_blank">Grunge</a></li>
+      <li><a href="https://www.google.com/search?q=Punk+Rock" target="_blank">Punk Rock</a></li>
+      <li><a href="https://www.google.com/search?q=Indie+Rock" target="_blank">Indie Rock</a></li>
+      <li><a href="https://www.google.com/search?q=Rock+Alternativo" target="_blank">Rock Alternativo</a></li>
+      <li><a href="https://www.google.com/search?q=Progressive+Rock" target="_blank">Progressive Rock</a></li>
+    </ul>
+  </section>
+
+
+    <!-- Lista simples com dicas -->
+    <section>
+      <h2>Dicas para quem quer começar a ouvir rock</h2>
+      <ul>
+        <li>Explore bandas antigas e novas para descobrir diferentes estilos.</li>
+        <li>Ouça álbuns inteiros para sentir a proposta do artista.</li>
+        <li>Veja performances ao vivo para sentir a energia do rock.</li>
+        <li>Participe de comunidades online para compartilhar e aprender.</li>
+        <li>Experimente tocar um instrumento para se conectar ainda mais.</li>
+      </ul>
+    </section>
+    <!-- Playlist de Rock -->
+    <section id="playlist">
+      <h2>Playlist: Rock Classics</h2>
+      <p>Aumente o som com esses hinos do rock:</p>
+      <iframe style="border-radius:12px" 
+              src="https://open.spotify.com/embed/playlist/37i9dQZF1DWXRqgorJj26U" 
+              width="100%" height="352" 
+              frameborder="0" 
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+              loading="lazy">
+      </iframe>
+    </section>
+  </main>
+
+  <button id="back-to-top" title="Voltar ao topo">↑</button>
+
+  <footer>
+    &copy; 2025 Rock Internacional. Viva alto, viva livre, viva o rock!
+  </footer>
+
+  <script>
+    // Mostrar botão "voltar ao topo"
+    const topButton = document.getElementById("back-to-top"); /* Pega o elemento do DOM com o ID "back-to-top" e armazena na variável topButton */
+
+    window.onscroll = function () { /* Função que é chamada toda vez que o usuário rola a página */
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) { /* Verifica a posição do scroll vertical: document.body.scrollTop é para alguns navegadores antigos. document.documentElement.scrollTop é para navegadores modernos */
+        topButton.style.display = "block"; /* Se o scroll for maior que 300 pixels para baixo, o botão aparece (display = "block") */
+      } else {
+        topButton.style.display = "none"; /* Se estiver acima de 300 pixels (ou no topo da página), o botão fica oculto (display = "none") */
+      }
+    };
+
+    topButton.onclick = function () { /* Quando o botão é clicado, a página rola suavemente até o topo (top: 0) */
+      window.scrollTo({ top: 0, behavior: 'smooth' }); /* A propriedade behavior: 'smooth' faz a rolagem ser animada, não instantânea */
+    };
+  </script>
+ </body>
+</html>
